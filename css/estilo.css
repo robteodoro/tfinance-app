@@ -1,0 +1,452 @@
+/* ============================================================================
+   Tfinance — estilos
+   Cores e espaçamentos ficam nas variáveis abaixo; o tema escuro é aplicado
+   automaticamente quando o aparelho está no modo escuro.
+   ========================================================================== */
+
+:root {
+  --fundo: #f6f7f5;
+  --superficie: #ffffff;
+  --texto: #1d2422;
+  --texto-suave: #5b6663;
+  --borda: #dde2df;
+  --marca: #0f5c4d;
+  --marca-clara: #e3f0ec;
+  --alerta: #8a5a00;
+  --alerta-fundo: #fff5dc;
+
+  /* Cores das séries nos gráficos (distinguíveis também por daltônicos). */
+  --cor-1: #0f7b65;
+  --cor-2: #3b6fd4;
+  --cor-3: #d4693b;
+  --cor-4: #8a4fc2;
+  --cor-5: #b8922a;
+  --cor-6: #c23b6f;
+  --cor-neutra: #8a9490;
+
+  --raio: 10px;
+  --sombra: 0 1px 3px rgb(0 0 0 / 0.08);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #121614;
+    --superficie: #1b2120;
+    --texto: #e6ebe9;
+    --texto-suave: #9aa6a2;
+    --borda: #2e3734;
+    --marca: #4fc0a4;
+    --marca-clara: #1d3a33;
+    --alerta: #f2c46b;
+    --alerta-fundo: #3a2f17;
+    --cor-1: #4fc0a4;
+    --cor-2: #7aa2f0;
+    --cor-3: #f0956b;
+    --cor-4: #b48ae0;
+    --cor-5: #e0c060;
+    --cor-6: #f07aa6;
+    --cor-neutra: #7f8a86;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--marca); }
+h1 { font-size: 1.7rem; margin: 0.5rem 0 0.25rem; }
+h2 { font-size: 1.25rem; margin: 2rem 0 0.75rem; }
+h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+
+/* ---------------------------------------------------------------- Cabeçalho */
+.cabecalho {
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.marca {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--texto);
+}
+nav { display: flex; flex-wrap: wrap; gap: 0.25rem; overflow-x: auto; }
+nav a {
+  padding: 0.35rem 0.7rem; border-radius: 999px; text-decoration: none;
+  color: var(--texto-suave); white-space: nowrap;
+}
+nav a:hover { background: var(--marca-clara); }
+nav a[aria-current] { background: var(--marca); color: var(--superficie); }
+
+main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 1rem; }
+
+.rodape {
+  font-size: 0.8rem; color: var(--texto-suave); text-align: center;
+  padding: 1rem; border-top: 1px solid var(--borda);
+}
+
+/* ------------------------------------------------------------- Textos/avisos */
+.introducao { color: var(--texto-suave); margin-top: 0; }
+.nota { font-size: 0.85rem; color: var(--texto-suave); }
+.aviso {
+  background: var(--alerta-fundo); color: var(--alerta);
+  padding: 0.75rem 1rem; border-radius: var(--raio);
+}
+.carregando { color: var(--texto-suave); }
+
+/* --------------------------------------------------------------- Formulários */
+.painel {
+  background: var(--superficie); border: 1px solid var(--borda);
+  border-radius: var(--raio); padding: 0.75rem 1rem; margin: 1rem 0;
+}
+.painel summary { cursor: pointer; font-weight: 600; }
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem 1rem;
+  margin: 0.75rem 0;
+}
+.campo { display: flex; flex-direction: column; gap: 0.25rem; }
+.rotulo { font-size: 0.85rem; color: var(--texto-suave); display: flex; align-items: center; gap: 0.35rem; }
+.entrada { display: flex; align-items: stretch; }
+.entrada input { flex: 1; min-width: 0; }
+.entrada select { margin-left: 0.35rem; }
+.sufixo {
+  display: flex; align-items: center; padding: 0 0.5rem; font-size: 0.85rem;
+  color: var(--texto-suave); border: 1px solid var(--borda); border-left: 0;
+  border-radius: 0 6px 6px 0; background: var(--fundo);
+}
+.entrada input:has(+ .sufixo) { border-radius: 6px 0 0 6px; }
+
+input, select, button { font: inherit; color: inherit; }
+input[type="text"], input[type="search"], select {
+  padding: 0.5rem 0.6rem; border: 1px solid var(--borda); border-radius: 6px;
+  background: var(--superficie);
+}
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--marca); outline-offset: 1px;
+}
+.campo-caixa { flex-direction: row; align-items: center; gap: 0.5rem; font-size: 0.9rem; grid-column: 1 / -1; }
+
+.botoes { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.botao-secundario, .botao-pequeno, .janela-acoes button {
+  border: 1px solid var(--marca); color: var(--marca); background: transparent;
+  border-radius: 6px; padding: 0.45rem 0.9rem; cursor: pointer;
+}
+.botao-secundario:hover, .botao-pequeno:hover { background: var(--marca-clara); }
+.botao-pequeno { padding: 0.2rem 0.6rem; font-size: 0.85rem; }
+.botao-remover {
+  border: 0; background: transparent; color: var(--texto-suave); cursor: pointer;
+  font-size: 1.1rem; align-self: end; padding: 0.5rem;
+}
+
+/* Objetivo da simulação: botões grandes de escolha. */
+.objetivos { border: 0; padding: 0; margin: 0 0 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.objetivos legend { font-weight: 600; margin-bottom: 0.5rem; }
+.opcao-objetivo input { position: absolute; opacity: 0; }
+.opcao-objetivo span {
+  display: block; padding: 0.55rem 1rem; border: 1px solid var(--borda);
+  border-radius: 999px; cursor: pointer; background: var(--superficie);
+}
+.opcao-objetivo input:checked + span { background: var(--marca); color: var(--superficie); border-color: var(--marca); }
+.opcao-objetivo input:focus-visible + span { outline: 2px solid var(--marca); outline-offset: 2px; }
+
+/* --------------------------------------------------------------------- Abas */
+.abas { display: flex; gap: 0.25rem; border-bottom: 1px solid var(--borda); margin-top: 1.5rem; overflow-x: auto; }
+.abas button, .abas a {
+  text-decoration: none;
+  border: 0; background: transparent; padding: 0.6rem 1rem; cursor: pointer;
+  color: var(--texto-suave); border-bottom: 3px solid transparent; white-space: nowrap;
+}
+.abas button[aria-selected="true"], .abas a[aria-selected="true"] { color: var(--marca); border-bottom-color: var(--marca); font-weight: 600; }
+.conteudo-aba { padding-top: 1rem; }
+
+/* --------------------------------------------------------------- Resultados */
+.cartao-resultado {
+  background: var(--superficie); border: 1px solid var(--borda);
+  border-radius: var(--raio); padding: 1rem 1.25rem; box-shadow: var(--sombra);
+}
+.destaque { display: flex; flex-direction: column; margin: 0; }
+.destaque span { color: var(--texto-suave); }
+.destaque strong { font-size: 2rem; color: var(--marca); }
+.frase { margin-top: 0.25rem; }
+.resumo-colunas { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 2rem; margin-top: 1rem; }
+.linha-resumo {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 0.4rem 0; border-bottom: 1px dashed var(--borda);
+}
+.linha-resumo span { display: flex; align-items: center; gap: 0.35rem; color: var(--texto-suave); }
+/* Valores nunca quebram no meio ("11,71% a.a." fica sempre numa linha só). */
+.linha-resumo strong { white-space: nowrap; }
+.linha-resumo.total { border-bottom: 0; border-top: 2px solid var(--texto); font-size: 1.05rem; }
+.linha-resumo.total span { color: var(--texto); }
+
+.observacoes { font-size: 0.9rem; color: var(--texto-suave); padding-left: 1.2rem; }
+.observacoes li { margin: 0.3rem 0; }
+
+/* ------------------------------------------------------------------ Tabelas */
+.tabela-rolavel { overflow-x: auto; }
+.tabela {
+  width: 100%; border-collapse: collapse; background: var(--superficie);
+  border-radius: var(--raio); overflow: hidden; font-size: 0.92rem;
+}
+.tabela th, .tabela td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid var(--borda); }
+.tabela th { font-size: 0.8rem; color: var(--texto-suave); font-weight: 600; vertical-align: bottom; }
+.tabela td small { color: var(--texto-suave); }
+.tabela tr.melhor td { background: var(--marca-clara); }
+
+/* Comparador: uma linha por opção. */
+.linha-opcao {
+  display: grid; grid-template-columns: auto 1fr 1fr 1fr auto; gap: 0.75rem; align-items: end;
+  padding: 0.5rem 0; border-bottom: 1px solid var(--borda);
+}
+@media (max-width: 640px) {
+  .linha-opcao { grid-template-columns: auto 1fr auto; }
+  .linha-opcao .campo:nth-of-type(2), .linha-opcao .campo:nth-of-type(3) { grid-column: 2; }
+}
+.lista-opcoes { margin-bottom: 0.75rem; }
+
+/* ------------------------------------------------------------------ Gráfico */
+.espaco-grafico { margin: 1.25rem 0; }
+.grafico { background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio); padding: 0.75rem; }
+.legenda { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; font-size: 0.85rem; margin-bottom: 0.5rem; }
+.item-legenda { display: flex; align-items: center; gap: 0.35rem; }
+.amostra { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 0.35rem; vertical-align: middle; }
+.amostra.grande { width: 16px; height: 16px; align-self: center; }
+.area-grafico { position: relative; }
+.area-grafico svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.area-grafico .grade { stroke: var(--borda); }
+.area-grafico .eixo { fill: var(--texto-suave); font-size: 12px; }
+.area-grafico .cursor { stroke: var(--texto-suave); stroke-dasharray: 3 3; }
+.dica {
+  position: absolute; top: 0.5rem; pointer-events: none;
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: 6px;
+  padding: 0.4rem 0.6rem; font-size: 0.82rem; box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+}
+.dica-titulo { font-weight: 600; margin-bottom: 0.2rem; }
+
+/* ---------------------------------------------------- Botão "?" e sua janela */
+.explica {
+  width: 1.25rem; height: 1.25rem; border-radius: 50%; flex-shrink: 0;
+  border: 1px solid var(--texto-suave); background: transparent; color: var(--texto-suave);
+  font-size: 0.75rem; font-weight: 700; line-height: 1; cursor: pointer; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+}
+.explica:hover { background: var(--marca); color: var(--superficie); border-color: var(--marca); }
+.janela-explica {
+  border: 0; border-radius: var(--raio); padding: 0; max-width: min(560px, 92vw);
+  background: var(--superficie); color: var(--texto); box-shadow: 0 10px 40px rgb(0 0 0 / 0.3);
+}
+.janela-explica::backdrop { background: rgb(0 0 0 / 0.4); }
+.janela-conteudo { padding: 1.25rem 1.5rem; }
+.janela-conteudo h2 { margin-top: 0; }
+.janela-conteudo .resumo { font-weight: 600; }
+.janela-acoes { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+
+/* ----------------------------------------------------------- Página inicial */
+.grade-indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+.cartao-indicador {
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio);
+  padding: 0.9rem 1rem; display: flex; flex-direction: column; box-shadow: var(--sombra);
+}
+.cartao-indicador .titulo { font-size: 0.85rem; color: var(--texto-suave); display: flex; gap: 0.35rem; align-items: center; }
+.cartao-indicador strong { font-size: 1.5rem; }
+.cartao-indicador small { color: var(--texto-suave); }
+
+.grade-secoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; }
+.cartao-secao {
+  display: flex; flex-direction: column; gap: 0.25rem; padding: 1rem;
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio);
+  text-decoration: none; color: var(--texto);
+}
+.cartao-secao:hover { border-color: var(--marca); }
+.cartao-secao span { color: var(--texto-suave); font-size: 0.9rem; }
+.cartao-secao em { font-size: 0.8rem; color: var(--alerta); }
+.cartao-secao.em-breve { opacity: 0.75; }
+
+/* ---------------------------------------------------------------- Glossário */
+.busca { width: 100%; max-width: 420px; margin: 0.5rem 0 1rem; }
+.verbete {
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio);
+  padding: 0.6rem 1rem; margin-bottom: 0.5rem;
+}
+.verbete summary { cursor: pointer; }
+.verbete summary span { color: var(--texto-suave); font-size: 0.9rem; margin-left: 0.25rem; }
+.texto-verbete { padding-top: 0.25rem; }
+
+.grupo-tesouro summary { cursor: pointer; }
+.grupo-tesouro summary h3 { display: inline; }
+.grupo-tesouro { margin-top: 1.25rem; }
+
+/* ------------------------------------------------- FIIs e ações (listas e páginas) */
+.filtros-fiis .objetivos { margin-bottom: 0; }
+.filtros-fiis .opcao-objetivo span { padding: 0.35rem 0.85rem; font-size: 0.92rem; }
+.filtros-fiis .objetivos legend { width: 100%; }
+.tabela-ativos tbody tr { cursor: pointer; }
+.tabela-ativos tbody tr:hover td { background: var(--marca-clara); }
+.tabela-ativos td:not(:first-child), .tabela-ativos th:not(:first-child) { text-align: right; white-space: nowrap; }
+.tabela-ativos th:not(:first-child) .explica { margin-left: 0.15rem; }
+/* No celular, a coluna do código fica fixa enquanto a tabela rola para o lado. */
+.tabela-ativos td:first-child, .tabela-ativos th:first-child {
+  position: sticky; left: 0; background: var(--superficie); z-index: 1;
+}
+/* Listas longas (ações, FIIs): a tabela rola dentro de uma caixa da altura da
+   tela, e o cabeçalho das colunas fica sempre visível no topo da caixa.
+   Fica dentro de uma caixa porque a tabela também precisa rolar para o lado
+   no celular, e o navegador só fixa o cabeçalho em relação à caixa que rola. */
+.lista-longa {
+  max-height: calc(100vh - 8rem);
+  max-height: calc(100dvh - 8rem);
+  overflow: auto;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+}
+.lista-longa .tabela { overflow: visible; border-radius: 0; }
+.lista-longa thead th {
+  position: sticky; top: 0; z-index: 2; background: var(--superficie);
+  box-shadow: inset 0 -1px 0 var(--borda); /* a borda some ao fixar; a sombra a substitui */
+}
+.lista-longa thead th:first-child { z-index: 3; } /* canto: fixo nas duas direções */
+.sem-quebra { white-space: nowrap; }
+.movimentos-fortes ul { list-style: none; padding: 0; margin: 0.5rem 0; display: grid; gap: 0.35rem; }
+.movimentos-fortes small { color: var(--texto-suave); margin-left: 0.3rem; }
+.positivo { color: var(--cor-1); }
+.negativo { color: var(--cor-6); }
+
+.etiqueta {
+  display: inline-block; vertical-align: middle; font-size: 0.8rem; font-weight: 600;
+  padding: 0.15rem 0.6rem; border-radius: 999px; background: var(--marca-clara); color: var(--marca);
+}
+
+/* Barrinha proporcional ao valor de cada rendimento. */
+.tabela-rendimentos td:nth-child(3) { min-width: 6rem; }
+.tabela-rendimentos th, .tabela-rendimentos td { padding: 0.5rem 0.4rem; }
+/* Imóveis do FII: nome pode quebrar linha; coluna da vacância com a barrinha. */
+.tabela-imoveis td:last-child { min-width: 5.5rem; }
+.tabela-imoveis th, .tabela-imoveis td { padding: 0.5rem 0.4rem; }
+.barra-valor { height: 6px; background: var(--fundo); border-radius: 3px; margin-bottom: 0.2rem; }
+.barra-valor span { display: block; height: 100%; background: var(--cor-1); border-radius: 3px; }
+
+/* Barra única dividida nas partes da carteira do fundo. */
+.barra-composicao {
+  display: flex; height: 22px; border-radius: 6px; overflow: hidden;
+  background: var(--fundo); border: 1px solid var(--borda);
+}
+.barra-composicao span { display: block; height: 100%; }
+.legenda-composicao { list-style: none; padding: 0; margin: 0.75rem 0; display: grid; gap: 0.35rem; }
+.legenda-composicao li { display: flex; align-items: center; gap: 0.25rem; }
+.legenda-composicao strong { margin-left: auto; }
+@media (min-width: 640px) { .legenda-composicao { max-width: 420px; } }
+
+/* Cartões menores: dois por linha mesmo no celular. */
+.grade-indicadores.compacta { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem; }
+.grade-indicadores.compacta .cartao-indicador { padding: 0.7rem 0.8rem; }
+.grade-indicadores.compacta strong { font-size: 1.25rem; }
+/* Na ficha os textos são longos (nomes de empresas): podem quebrar linha. */
+.ficha .linha-resumo strong { white-space: normal; text-align: right; }
+@media (max-width: 480px) {
+  .tabela-ativos th, .tabela-ativos td { padding: 0.5rem 0.45rem; }
+}
+
+.referencias { margin-top: -0.25rem; font-size: 0.95rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; }
+.barra-valor.negativa span { background: var(--cor-6); }
+.tabela-resultados td:nth-child(3) { min-width: 8rem; }
+.tabela-resultados td:not(:first-child), .tabela-resultados th:not(:first-child) { text-align: right; }
+.tabela-resultados .barra-valor span { margin-left: auto; }
+
+.so-celular { display: none; }
+@media (max-width: 480px) {
+  /* Colunas secundárias somem em telas estreitas para a tabela caber. */
+  .tabela .opcional { display: none; }
+  .so-celular { display: inline; }
+  .abas { gap: 0; }
+  .abas button, .abas a { padding: 0.6rem 0.55rem; font-size: 0.93rem; }
+  .tabela-posicoes th, .tabela-posicoes td { padding: 0.5rem 0.4rem; }
+  .tabela-rendimentos td:nth-child(3), .tabela-resultados td:nth-child(3) { min-width: 0; }
+  .tabela-resultados th, .tabela-resultados td { padding: 0.5rem 0.4rem; }
+}
+
+/* ------------------------------------------------------------ Carteira */
+.botao-principal {
+  border: 1px solid var(--marca); background: var(--marca); color: var(--superficie);
+  border-radius: 6px; padding: 0.55rem 1.1rem; cursor: pointer; font-weight: 600;
+}
+.botao-principal:hover { filter: brightness(1.1); }
+.botao-perigo {
+  border: 1px solid var(--cor-6); color: var(--cor-6); background: transparent;
+  border-radius: 6px; padding: 0.45rem 0.9rem; cursor: pointer;
+}
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.botao-arquivo { display: inline-block; }
+.mensagem { min-height: 1.2em; margin: 0.5rem 0 0; }
+.mensagem.erro { color: var(--cor-6); }
+.mensagem.sucesso { color: var(--cor-1); }
+.cartao-resultado + .cartao-resultado { margin-top: 1rem; }
+.cartao-resultado h3 { margin-top: 0; }
+.boas-vindas h2 { margin-top: 0; }
+.frase-comparacao { margin: 1rem 0; }
+.frase-comparacao small { color: var(--texto-suave); }
+.formulario.painel { margin-top: 0.5rem; }
+.item-lancamento {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; align-items: flex-start;
+  background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio);
+  padding: 0.6rem 0.9rem; margin-bottom: 0.5rem;
+}
+.item-lancamento .botao-remover { padding: 0 0.4rem; vertical-align: middle; }
+.item-lancamento small { color: var(--texto-suave); }
+.acao-item summary { cursor: pointer; color: var(--marca); font-size: 0.9rem; }
+.mini-formulario { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: end; margin-top: 0.5rem; font-size: 0.9rem; }
+.mini-formulario label { display: flex; flex-direction: column; gap: 0.2rem; color: var(--texto-suave); }
+.mini-formulario input { padding: 0.35rem 0.5rem; border: 1px solid var(--borda); border-radius: 6px; background: var(--superficie); max-width: 11rem; }
+.tabela-posicoes td .amostra { margin-right: 0.4rem; }
+.lista-barras { list-style: none; padding: 0; margin: 0 0 1rem; display: grid; gap: 0.4rem; }
+.lista-barras li { display: grid; grid-template-columns: minmax(7rem, 14rem) 1fr auto; gap: 0.6rem; align-items: center; font-size: 0.92rem; }
+.lista-barras .nome { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lista-barras .barra-valor { margin: 0; height: 10px; }
+.tabela-correlacao td, .tabela-correlacao th { text-align: center; white-space: nowrap; }
+.tabela-correlacao tbody th { text-align: left; }
+
+/* ------------------------------------------------- Ações: acompanhamento */
+/* Estrela para marcar ações acompanhadas. */
+.estrela {
+  border: 0; background: transparent; cursor: pointer; padding: 0 0.15rem;
+  font-size: 1.2rem; line-height: 1; color: var(--texto-suave); vertical-align: -0.1em;
+}
+.estrela[aria-pressed="true"] { color: var(--cor-5); }
+.estrela.com-texto {
+  font-size: 0.95rem; border: 1px solid var(--borda); border-radius: 999px;
+  padding: 0.25rem 0.7rem; vertical-align: middle; color: var(--texto);
+}
+.estrela.com-texto span:first-child { font-size: 1.1rem; margin-right: 0.3rem; color: var(--texto-suave); }
+.estrela.com-texto[aria-pressed="true"] { background: var(--marca-clara); border-color: var(--marca); }
+.estrela.com-texto[aria-pressed="true"] span:first-child { color: var(--cor-5); }
+
+/* Níveis de risco da dívida. */
+.etiqueta.nivel-baixo { background: color-mix(in srgb, var(--cor-1) 18%, transparent); color: var(--cor-1); }
+.etiqueta.nivel-atencao { background: color-mix(in srgb, var(--cor-5) 22%, transparent); color: var(--texto); }
+.etiqueta.nivel-alto { background: color-mix(in srgb, var(--cor-6) 18%, transparent); color: var(--cor-6); }
+
+.destaques { margin: 1.25rem 0; }
+.destaques h2 { margin-top: 0; }
+.tabela-comparacao td, .tabela-comparacao th { white-space: nowrap; }
+.tabela-comparacao tfoot tr:first-child td { border-top: 2px solid var(--borda); }
+.tabela-anos th, .tabela-anos td { padding: 0.5rem 0.45rem; }
+.contagem { margin: 0.25rem 0 0; }
+.abas + .referencias, .abas + .tabela-rolavel, .abas + .cartao-resultado { margin-top: 1rem; }
